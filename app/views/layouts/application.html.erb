@@ -11,6 +11,22 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="max-w-6xl mx-auto">
+      <% if flash[:notice] %>
+      <div role="alert" class="rounded border-s-4 border-orange-500 bg-orange-50 p-4 mb-2">
+        <p class="text-orange-700">
+        <%= notice %>
+        </p>
+      </div>
+      <% end %>
+      <% if flash[:alert] %>
+      <div role="alert" class="rounded border-s-4 border-red-500 bg-red-50 p-4 mb-2">
+        <p class="text-red-700">
+          <%= alert %>
+        </p>
+      </div>
+      <% end %>
+      <%= yield %>
+    </div>
   </body>
 </html>
