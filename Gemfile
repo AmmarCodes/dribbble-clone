@@ -65,3 +65,5 @@ end
 
 
 gem "devise", "~> 4.9"
+gem 'carrierwave', '~> 3.0'
+gem 'mini_magick'
