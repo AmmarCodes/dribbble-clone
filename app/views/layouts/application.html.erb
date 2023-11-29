@@ -18,11 +18,18 @@
             </a>
             <nav>
               <ul class="gap-4 flex">
-                <li class="lg:ms-auto">
-                  <a class="block text-sm font-medium text-gray-900">
-                    Menu item
-                  </a>
+                <li>
+                  <%= link_to "New Shot", new_shot_path, class: "block text-sm font-medium text-gray-900" %>
                 </li>
+                <% if current_user %>
+                  <li>
+                    <%= link_to 'Sign out', destroy_user_session_path, class: 'block text-sm font-medium text-gray-900' %>
+                  </li>
+                <% else %>
+                  <li>
+                    <%= link_to 'Sign in', new_user_session_path, class: 'block text-sm font-medium text-gray-900' %>
+                  </li>
+                <% end %>
               </ul>
             </nav>
           </div>
