@@ -1,0 +1,20 @@
+<div class="border mb-4 p-4 rounded-lg flex items-start">
+  <div class="mr-4">
+    <a href="#TODO:/point/to/user/profile">
+      <img src="<%= comment.user.gravatar_image %>" width="46" height="46" class="w-12 h-12 rounded-full" alt="<%= comment.user.name %>'s profile photo" />
+    </a>
+  </div>
+  <div class="flex-1">
+    <p class="font-medium text-gray-600 mb-2">
+      <%= comment.user.name %>
+    </p>
+    <p>
+      <%= comment.content %>
+    </p>
+  </div>
+  <div class="items-start text-base font-semibold text-gray-900 dark:text-white">
+    <% if current_user == comment.user %>
+      <%= button_to 'Destroy', shot_comment_path(comment.shot_id, comment.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'rounded-lg py-2 px-3 bg-gray-100 text-sm', form_class: 'd-inline' %>
+    <% end %>
+  </div>
+</div>

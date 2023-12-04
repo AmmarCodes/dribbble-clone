@@ -1,0 +1,7 @@
+<%= form_with model: @shot.comments.build, url: shot_comments_path(@shot.id), method: :post do |f| %>
+  <%= f.hidden_field :shot_id, value: @shot.id %>
+  <div class="my-5">
+    <%= f.text_area :content, placeholder: 'What do you think of the shot?', class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+  <%= f.submit "Submit", class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+<% end %>

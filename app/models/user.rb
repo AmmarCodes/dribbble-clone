@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :shots, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   def gravatar_image
     hash = Digest::MD5.hexdigest(email.downcase)
