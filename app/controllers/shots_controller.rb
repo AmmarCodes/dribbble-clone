@@ -1,6 +1,6 @@
 class ShotsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
-  before_action :set_shot, only: %i[ show edit update destroy ]
+  before_action :set_shot, only: %i[show edit update destroy]
 
   # GET /shots or /shots.json
   def index
@@ -9,6 +9,9 @@ class ShotsController < ApplicationController
 
   # GET /shots/1 or /shots/1.json
   def show
+    return unless session.id.present?
+
+    impressionist @shot, nil, unique: %i[impressionable_type impressionable_id session_hash]
   end
 
   # GET /shots/new
@@ -17,8 +20,7 @@ class ShotsController < ApplicationController
   end
 
   # GET /shots/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /shots or /shots.json
   def create
@@ -26,7 +28,7 @@ class ShotsController < ApplicationController
 
     respond_to do |format|
       if @shot.save
-        format.html { redirect_to shot_url(@shot), notice: "Shot was successfully created." }
+        format.html { redirect_to shot_url(@shot), notice: 'Shot was successfully created.' }
         format.json { render :show, status: :created, location: @shot }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +41,7 @@ class ShotsController < ApplicationController
   def update
     respond_to do |format|
       if @shot.update(shot_params)
-        format.html { redirect_to shot_url(@shot), notice: "Shot was successfully updated." }
+        format.html { redirect_to shot_url(@shot), notice: 'Shot was successfully updated.' }
         format.json { render :show, status: :ok, location: @shot }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,19 +55,20 @@ class ShotsController < ApplicationController
     @shot.destroy!
 
     respond_to do |format|
-      format.html { redirect_to shots_url, notice: "Shot was successfully destroyed." }
+      format.html { redirect_to shots_url, notice: 'Shot was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_shot
-      @shot = Shot.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def shot_params
-      params.require(:shot).permit(:title, :description, :user_shot)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_shot
+    @shot = Shot.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def shot_params
+    params.require(:shot).permit(:title, :description, :user_shot)
+  end
 end
