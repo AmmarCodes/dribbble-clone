@@ -1,8 +1,8 @@
-<div class="mx-auto">
+<div class="mx-auto mb-5">
   <div id="<%= dom_id @shot %>">
-    <div class="my-5">
+    <div class="my-5 flex bg-white justify-center p-5">
       <%= link_to @shot do %>
-        <%= image_tag(@shot.user_shot_url, class: "rounded-lg border border-gray-100 border-solid drop-shadow-md") %>
+        <%= image_tag(@shot.user_shot_url) %>
       <% end %>
     </div>
     <div class="flex align-center justify-between">
